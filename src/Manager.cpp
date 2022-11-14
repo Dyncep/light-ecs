@@ -1,4 +1,4 @@
-#include "Manager.hpp"
+#include "ECS/Manager.hpp"
 
 namespace Dyncep::ECS {
 void Manager::update() {

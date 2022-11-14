@@ -1,4 +1,4 @@
-#include "Entity.hpp"
+#include "ECS/Entity.hpp"
 
 namespace Dyncep::ECS {
 Entity::Entity() = default;

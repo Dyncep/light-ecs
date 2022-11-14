@@ -1,7 +1,6 @@
 #ifndef DYNCEP_ECS_COMPONENT_HPP
 #define DYNCEP_ECS_COMPONENT_HPP
 
-
 namespace Dyncep::ECS {
 
 /**
