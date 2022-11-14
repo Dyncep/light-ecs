@@ -1,6 +1,9 @@
 #include "ECS/Manager.hpp"
 
 namespace Dyncep::ECS {
+
+Manager::Manager() = default;
+
 void Manager::update() {
   std::for_each(std::begin(entities), std::end(entities),
                 [](auto &e) { e->update(); });

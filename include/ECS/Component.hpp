@@ -15,22 +15,22 @@ class Entity;
 class Component {
 public:
   /**
-   * @brief default constructor, abstract class anyways
+   * @brief default constructor
    */
   Component() = default;
 
   /**
-   * @brief abstract initialize function for each component
+   * @brief virtual initialize function for each component
    */
-  virtual void initialize() = 0;
+  virtual void initialize() {}
 
   /**
-   * @brief abstract update function for each component
+   * @brief virtual update function for each component
    */
-  virtual void update() = 0;
+  virtual void update() {}
 
   /**
-   * @brief abstract render function for each component
+   * @brief virtual render function for each component
    */
   virtual void render() = 0;
 
