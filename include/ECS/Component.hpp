@@ -37,9 +37,16 @@ public:
   /**
    * @brief set the entity of the component
    *
-   * @param entity - Entity
+   * @param Entity*
    */
   void setEntity(Entity *entity) { this->entity = entity; }
+
+  /**
+   * @brief getter method for the entity of the component
+   *
+   * @return Entity*
+   */
+  Entity *getEntity() { return this->entity; }
 
   /**
    * @brief virtual destructor, since every component may generate different
