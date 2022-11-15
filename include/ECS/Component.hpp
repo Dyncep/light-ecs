@@ -32,7 +32,14 @@ public:
   /**
    * @brief virtual render function for each component
    */
-  virtual void render() = 0;
+  virtual void render() {}
+
+  /**
+   * @brief set the entity of the component
+   *
+   * @param entity - Entity
+   */
+  void setEntity(Entity *entity) { this->entity = entity; }
 
   /**
    * @brief virtual destructor, since every component may generate different
