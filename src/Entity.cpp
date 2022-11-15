@@ -25,34 +25,4 @@ void Entity::render() {
 
 void Entity::destroy() noexcept { is_active = false; }
 
-template <typename ComponentType> bool Entity::hasComponent() const {
-  return this->component_bitset[getComponentTypeID<ComponentType>()];
-}
-
-template <typename ComponentType, typename... TArgs>
-ComponentType &Entity::addComponent(TArgs &&...args) {
-  /** create new unique pointer **/
-  auto *c = std::make_unique<ComponentType>(std::forward<TArgs>(args)...);
-
-  /** fetch raw pointer to return reference **/
-  auto *p = c->get();
-
-  /** set this as parent entity to component **/
-  c->entity = this;
-
-  /** add to containers **/
-  components.push_back(std::move(c));
-  component_array[getComponentTypeID<ComponentType>()] = p;
-  component_bitset[getComponentTypeID<ComponentType>()] = 1;
-
-  /** initialize component **/
-  p->initialize();
-  return p;
-}
-
-template <typename ComponentType> ComponentType &Entity::getComponent() {
-  return *static_cast<ComponentType *>(
-      component_array[getComponentTypeID<ComponentType>()]);
-}
-
 } // namespace Dyncep::ECS

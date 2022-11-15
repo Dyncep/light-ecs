@@ -108,7 +108,9 @@ public:
    * @tparam CompnoentType - the type of the component to check for existence
    * @return bool
    */
-  template <typename ComponentType> bool hasComponent() const;
+  template <typename ComponentType> bool hasComponent() const {
+    return this->component_bitset[getComponentTypeID<ComponentType>()];
+  }
 
   /**
    * @brief add a component to the entity
@@ -118,7 +120,25 @@ public:
    * @return T& - reference to the newly created component
    */
   template <typename ComponentType, typename... TArgs>
-  ComponentType &addComponent(TArgs &&...args);
+  ComponentType &addComponent(TArgs &&...args) {
+    /** create new unique pointer **/
+    auto c = std::make_unique<ComponentType>(std::forward<TArgs>(args)...);
+
+    /** fetch raw pointer to return reference **/
+    auto *p = c.get();
+
+    /** set this as parent entity to component **/
+    p->setEntity(this);
+
+    /** add to containers **/
+    components.push_back(std::move(c));
+    component_array[getComponentTypeID<ComponentType>()] = p;
+    component_bitset[getComponentTypeID<ComponentType>()] = 1;
+
+    /** initialize component **/
+    p->initialize();
+    return *p;
+  }
 
   /**
    * @brief retrieve the reference to a component managed by this entity
@@ -129,7 +149,10 @@ public:
    * @tparam ComponentType - the type of component to fetch
    * @return ComponentType& - reference to the component
    */
-  template <typename ComponentType> ComponentType &getComponent();
+  template <typename ComponentType> ComponentType &getComponent() {
+    return *static_cast<ComponentType *>(
+        component_array[getComponentTypeID<ComponentType>()]);
+  }
 
 private:
   /**

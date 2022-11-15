@@ -45,7 +45,7 @@ public:
    * @brief virtual destructor, since every component may generate different
    * stuff to be cleaned up
    */
-  virtual ~Component();
+  virtual ~Component() {}
 
 protected:
   /**
