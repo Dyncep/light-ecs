@@ -40,7 +40,7 @@ public:
    */
   virtual ~Component();
 
-private:
+protected:
   /**
    * @entity the entity parent of this component
    */
