@@ -15,24 +15,29 @@ public:
   /**
    * @brief invoke the update function for each entity
    */
-  void update();
+  virtual void update();
 
   /**
    * @brief invoke the render function for each entity
    */
-  void render();
+  virtual void render();
 
   /**
    * @brief remove inactive entities
    */
-  void clean();
+  virtual void clean();
 
   /**
    * @brief add an entity to the manager and a reference to it
    *
    * @return &Entity
    */
-  Entity &addEntity();
+  virtual Entity &addEntity();
+
+  /**
+   * @brief virtual destructor
+   */
+  virtual ~Manager() = default;
 
 private:
   /**
